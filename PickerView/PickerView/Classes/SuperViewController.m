@@ -84,14 +84,16 @@ static NSInteger const kSuperViewControllerCount = 30;
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textLabel.backgroundColor = [UIColor clearColor];
-        cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.f];
         if (tableView.tag == kCSPickerViewBackTableTag) {
             cell.textLabel.textColor = [UIColor grayColor];
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
+        } else {
+            cell.textLabel.backgroundColor = [UIColor clearColor];
+            cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.f];
         }
     }
     
+    // Populate table cell.
     [self pickerView:pickerView tableView:tableView populateCell:cell atRow:row];
     
     return cell;
