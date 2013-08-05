@@ -23,7 +23,7 @@
 
 - (void)pickerView:(CSPickerView *)pickerView customizeTableView:(UITableView *)tableView
 {
-    if (tableView.tag != kCSPickerViewTablePickerTag) {
+    if (tableView.tag != kCSPickerViewFrontTableTag) {
         tableView.backgroundColor = [UIColor blackColor];
     }
 }
@@ -35,7 +35,7 @@
 {
     NSDate *someDate = [self dateAtRow:row];
     cell.textLabel.text = [self.dateFormatterShort stringFromDate:someDate];
-    if (tableView.tag == kCSPickerViewTablePickerTag) {
+    if (tableView.tag == kCSPickerViewFrontTableTag) {
         cell.detailTextLabel.text = [self.dateFormatterLong stringFromDate:someDate];
     }
 }

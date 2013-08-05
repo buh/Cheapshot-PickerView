@@ -67,7 +67,7 @@ static NSInteger const kLevelUpViewControllerCount = 6;
 
 - (void)pickerView:(CSPickerView *)pickerView customizeTableView:(UITableView *)tableView
 {
-    if (tableView.tag != kCSPickerViewTablePickerTag) {
+    if (tableView.tag != kCSPickerViewFrontTableTag) {
         tableView.backgroundColor = [UIColor blackColor];
     }
 }
@@ -77,7 +77,7 @@ static NSInteger const kLevelUpViewControllerCount = 6;
       populateCell:(UITableViewCell *)cell
              atRow:(NSInteger)row
 {
-    cell.textLabel.text = (tableView.tag == kCSPickerViewTablePickerTag
+    cell.textLabel.text = (tableView.tag == kCSPickerViewFrontTableTag
                            ? [NSString stringWithFormat:@"+%i %@", row, (pickerView == _pickerView2 ? @"Stamina" : @"Agility")]
                            : [NSString stringWithFormat:@"+%i", row]);
     

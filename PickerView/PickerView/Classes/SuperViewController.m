@@ -66,7 +66,7 @@ static NSInteger const kSuperViewControllerCount = 30;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return tableView.tag == kCSPickerViewTablePickerTag ? 60.f : 30.f;
+    return tableView.tag == kCSPickerViewFrontTableTag ? 60.f : 30.f;
 }
 
 - (NSInteger)pickerView:(CSPickerView *)pickerView numberOfRowsInTableView:(UITableView *)tableView
@@ -77,8 +77,8 @@ static NSInteger const kSuperViewControllerCount = 30;
 - (UITableViewCell *)pickerView:(CSPickerView *)pickerView tableView:(UITableView *)tableView cellForRow:(NSInteger)row
 {
     // Create table cell.
-    NSString *identifier = (tableView.tag == kCSPickerViewTablePickerTag
-                            ? kCSPickerViewPickerCellIdentifier : kCSPickerViewCellIdentifier);
+    NSString *identifier = (tableView.tag == kCSPickerViewFrontTableTag
+                            ? kCSPickerViewFrontCellIdentifier : kCSPickerViewBackCellIdentifier);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell)
     {
@@ -86,7 +86,7 @@ static NSInteger const kSuperViewControllerCount = 30;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.f];
-        if (tableView.tag == kCSPickerViewTableTag) {
+        if (tableView.tag == kCSPickerViewBackTableTag) {
             cell.textLabel.textColor = [UIColor grayColor];
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
         }

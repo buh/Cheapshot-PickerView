@@ -23,10 +23,10 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSInteger const kCSPickerViewTableTag;
-extern NSInteger const kCSPickerViewTablePickerTag;
-extern NSString *const kCSPickerViewCellIdentifier;
-extern NSString *const kCSPickerViewPickerCellIdentifier;
+extern NSInteger const kCSPickerViewBackTableTag;
+extern NSInteger const kCSPickerViewFrontTableTag;
+extern NSString *const kCSPickerViewBackCellIdentifier;
+extern NSString *const kCSPickerViewFrontCellIdentifier;
 
 @protocol CSPickerViewDataSource, CSPickerViewDelegate;
 @class CSPickerGradientView;

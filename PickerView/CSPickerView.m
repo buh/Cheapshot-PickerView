@@ -24,10 +24,10 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CSPickerView.h"
 
-NSInteger const kCSPickerViewTableTag = 10001;
-NSInteger const kCSPickerViewTablePickerTag = 10002;
-NSString *const kCSPickerViewCellIdentifier = @"kCSPickerViewCellIdentifier";
-NSString *const kCSPickerViewPickerCellIdentifier = @"kCSPickerViewPickerCellIdentifier";
+NSInteger const kCSPickerViewBackTableTag = 10001;
+NSInteger const kCSPickerViewFrontTableTag = 10002;
+NSString *const kCSPickerViewBackCellIdentifier = @"kCSPickerViewBackCellIdentifier";
+NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdentifier";
 
 @interface CSPickerTableView : UITableView
 @property (nonatomic) CSPickerView *pickerView;
@@ -42,7 +42,7 @@ NSString *const kCSPickerViewPickerCellIdentifier = @"kCSPickerViewPickerCellIde
 @property (nonatomic) CGFloat frontTableViewY;
 @property (nonatomic) CGFloat frontTableViewHeight;
 @property (nonatomic) CGFloat backTableViewHeight;
-@property (nonatomic) CGFloat heightRation;
+@property (nonatomic) CGFloat heightRatio;
 @end
 
 @implementation CSPickerView
@@ -62,19 +62,19 @@ NSString *const kCSPickerViewPickerCellIdentifier = @"kCSPickerViewPickerCellIde
 {
     // Top table.
     _topTableView = [self createTableView];
-    _topTableView.tag = kCSPickerViewTableTag;
+    _topTableView.tag = kCSPickerViewBackTableTag;
     _topTableView.pickerView = self;
     [self addSubview:_topTableView];
     
     // Bottom table.
     _bottomTableView = [self createTableView];
-    _bottomTableView.tag = kCSPickerViewTableTag;
+    _bottomTableView.tag = kCSPickerViewBackTableTag;
     _bottomTableView.pickerView = self;
     [self addSubview:_bottomTableView];
     
-    // Front table (Picker).
+    // Front table.
     _frontTableView = [self createTableView];
-    _frontTableView.tag = kCSPickerViewTablePickerTag;
+    _frontTableView.tag = kCSPickerViewFrontTableTag;
     _frontTableView.delegate = self;
     [self addSubview:_frontTableView];
 }
@@ -137,7 +137,7 @@ NSString *const kCSPickerViewPickerCellIdentifier = @"kCSPickerViewPickerCellIde
     
     _backTableViewHeight = [_delegate tableView:_topTableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     _frontTableViewHeight = [_delegate tableView:_frontTableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    _heightRation = _frontTableViewHeight / _backTableViewHeight;
+    _heightRatio = _frontTableViewHeight / _backTableViewHeight;
     _frontTableViewY = (self.frame.size.height - _frontTableViewHeight) / 2.f;
     
     // Front table frame.
@@ -246,7 +246,7 @@ NSString *const kCSPickerViewPickerCellIdentifier = @"kCSPickerViewPickerCellIde
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.tag == kCSPickerViewTableTag) {
+    if (scrollView.tag == kCSPickerViewBackTableTag) {
         return;
     }
     
@@ -312,7 +312,7 @@ NSString *const kCSPickerViewPickerCellIdentifier = @"kCSPickerViewPickerCellIde
     
     if (_pickerView)
     {
-        CGFloat y = _pickerView.scrollView.contentOffset.y / _pickerView.heightRation;
+        CGFloat y = _pickerView.scrollView.contentOffset.y / _pickerView.heightRatio;
         CGPoint contentOffset = CGPointZero;
         if (_pickerView.topTableView == self) {
             contentOffset = CGPointMake(0.f, y - _pickerView.frontTableViewY);
