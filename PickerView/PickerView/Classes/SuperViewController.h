@@ -15,7 +15,8 @@
 @property (nonatomic) NSDateFormatter *dateFormatterLong;
 @property (nonatomic) NSDateFormatter *dateFormatterShort;
 
-- (void)addNextBarButtonWithTitle:(NSString *)title viewController:(UIViewController *)viewController;
+- (void)addNextBarButtonWithTitle:(NSString *)title;
+- (UIViewController *)nextViewController;
 
 // For children view controllers.
 - (void)pickerView:(CSPickerView *)pickerView

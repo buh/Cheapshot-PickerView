@@ -16,9 +16,14 @@
     self = [super init];
     if (self) {
         self.title = @"White Picker";
-        [self addNextBarButtonWithTitle:@"Black" viewController:[BlackViewController new]];
+        [self addNextBarButtonWithTitle:@"Black"];
     }
     return self;
+}
+
+- (UIViewController *)nextViewController
+{
+    return [BlackViewController new];
 }
 
 - (void)pickerView:(CSPickerView *)pickerView

@@ -10,10 +10,6 @@
 
 static NSInteger const kSuperViewControllerCount = 30;
 
-@interface SuperViewController ()
-@property (nonatomic) UIViewController *nextViewController;
-@end
-
 @implementation SuperViewController
 
 - (id)init
@@ -117,19 +113,26 @@ static NSInteger const kSuperViewControllerCount = 30;
 
 #pragma mark - Navigation
 
-- (void)addNextBarButtonWithTitle:(NSString *)title viewController:(UIViewController *)viewController
+- (void)addNextBarButtonWithTitle:(NSString *)title
 {
     UIBarButtonItem *nextBarButton = [[UIBarButtonItem alloc] initWithTitle:title
                                                                       style:UIBarButtonItemStyleBordered
                                                                      target:self
-                                                                     action:@selector(next)];
+                                                                     action:@selector(pushNextViewController)];
     self.navigationItem.rightBarButtonItem = nextBarButton;
-    _nextViewController = viewController;
 }
 
-- (void)next
+- (void)pushNextViewController
 {
-    [self.navigationController pushViewController:_nextViewController animated:YES];
+    UIViewController *nextViewController = [self nextViewController];
+    if (nextViewController) {
+        [self.navigationController pushViewController:nextViewController animated:YES];
+    }
+}
+
+- (UIViewController *)nextViewController
+{
+    return nil;
 }
 
 @end

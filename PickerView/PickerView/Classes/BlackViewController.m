@@ -16,9 +16,14 @@
     self = [super init];
     if (self) {
         self.title = @"Black Picker";
-        [self addNextBarButtonWithTitle:@"Level Up" viewController:[LevelUpViewController new]];
+        [self addNextBarButtonWithTitle:@"Level Up"];
     }
     return self;
+}
+
+- (UIViewController *)nextViewController
+{
+    return [LevelUpViewController new];
 }
 
 - (void)pickerView:(CSPickerView *)pickerView customizeTableView:(UITableView *)tableView
