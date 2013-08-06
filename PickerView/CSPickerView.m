@@ -87,6 +87,7 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.showsVerticalScrollIndicator = NO;
     tableView.showsHorizontalScrollIndicator = NO;
+    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     return tableView;
 }
 
@@ -97,6 +98,7 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
+    _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self addSubview:_scrollView];
     
     // Add tap gesture for selecting row.

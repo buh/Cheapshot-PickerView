@@ -2,11 +2,7 @@ Cheapshot-PickerView
 ===
 **Picker View for iOS**
 
-Screenshots
----
-![1](https://dl.dropboxusercontent.com/u/1280321/PickerView/1.png)
 ![2](https://dl.dropboxusercontent.com/u/1280321/PickerView/2.png)
-![3](https://dl.dropboxusercontent.com/u/1280321/PickerView/3.png)
 
 Adding to your project
 ---
