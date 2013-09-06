@@ -49,7 +49,7 @@ extern NSString *const kCSPickerViewFrontCellIdentifier;
 
 #pragma mark - Picker View Data Source
 
-@protocol CSPickerViewDataSource <UITableViewDataSource>
+@protocol CSPickerViewDataSource <NSObject>
 
 @required
 - (NSInteger)pickerView:(CSPickerView *)pickerView numberOfRowsInTableView:(UITableView *)tableView;

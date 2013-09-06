@@ -30,16 +30,18 @@ static NSInteger const kLevelUpViewControllerCount = 6;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithWhite:0.2f alpha:1.f];
     [self setupLabel];
     
     _pickerView2 = [[CSPickerView alloc] initWithFrame:CGRectZero];
     _pickerView2.delegate = self;
     _pickerView2.dataSource = self;
     [self.view addSubview:_pickerView2];
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     self.pickerView.selectedRow = 3;
-    _pickerView2.selectedRow = 2;
 }
 
 - (void)setupLabel
@@ -55,7 +57,7 @@ static NSInteger const kLevelUpViewControllerCount = 6;
 
 - (void)viewDidLayoutSubviews
 {
-//    [super viewDidLayoutSubviews];
+    [super viewDidLayoutSubviews];
     CGRect frame = self.view.bounds;
     frame.size.height = 220.f;
     frame.size.width = 159.f;

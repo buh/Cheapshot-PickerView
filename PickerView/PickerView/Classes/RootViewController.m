@@ -21,6 +21,12 @@
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.pickerView.gradientView.hidden = YES;
+}
+
 - (UIViewController *)nextViewController
 {
     return [BlackViewController new];
