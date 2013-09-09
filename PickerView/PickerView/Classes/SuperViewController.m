@@ -81,7 +81,7 @@ static NSInteger const kSuperViewControllerCount = 30;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.backgroundColor = [UIColor clearColor];
-        if (tableView.tag == kCSPickerViewBackTableTag) {
+        if (tableView.tag == kCSPickerViewBackTopTableTag || tableView.tag == kCSPickerViewBackBottomTableTag) {
             cell.textLabel.textColor = [UIColor grayColor];
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
         } else {

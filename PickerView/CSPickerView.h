@@ -23,7 +23,8 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSInteger const kCSPickerViewBackTableTag;
+extern NSInteger const kCSPickerViewBackTopTableTag;
+extern NSInteger const kCSPickerViewBackBottomTableTag;
 extern NSInteger const kCSPickerViewFrontTableTag;
 extern NSString *const kCSPickerViewBackCellIdentifier;
 extern NSString *const kCSPickerViewFrontCellIdentifier;

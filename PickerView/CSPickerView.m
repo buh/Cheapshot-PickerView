@@ -24,8 +24,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CSPickerView.h"
 
-NSInteger const kCSPickerViewBackTableTag = 10001;
-NSInteger const kCSPickerViewFrontTableTag = 10002;
+NSInteger const kCSPickerViewFrontTableTag = 10001;
+NSInteger const kCSPickerViewBackTopTableTag = 10002;
+NSInteger const kCSPickerViewBackBottomTableTag = 10003;
 NSString *const kCSPickerViewBackCellIdentifier = @"kCSPickerViewBackCellIdentifier";
 NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdentifier";
 
@@ -62,13 +63,13 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
 {
     // Top table.
     _topTableView = [self createTableView];
-    _topTableView.tag = kCSPickerViewBackTableTag;
+    _topTableView.tag = kCSPickerViewBackTopTableTag;
     _topTableView.pickerView = self;
     [self addSubview:_topTableView];
     
     // Bottom table.
     _bottomTableView = [self createTableView];
-    _bottomTableView.tag = kCSPickerViewBackTableTag;
+    _bottomTableView.tag = kCSPickerViewBackBottomTableTag;
     _bottomTableView.pickerView = self;
     [self addSubview:_bottomTableView];
     
@@ -248,7 +249,7 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.tag == kCSPickerViewBackTableTag) {
+    if (scrollView.tag == kCSPickerViewBackTopTableTag || scrollView.tag == kCSPickerViewBackBottomTableTag) {
         return;
     }
     
