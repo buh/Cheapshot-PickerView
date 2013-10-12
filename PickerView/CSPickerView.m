@@ -89,6 +89,7 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
     tableView.showsVerticalScrollIndicator = NO;
     tableView.showsHorizontalScrollIndicator = NO;
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    tableView.backgroundColor = [UIColor clearColor];
     return tableView;
 }
 
@@ -100,6 +101,7 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.decelerationRate = UIScrollViewDecelerationRateFast;
     _scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _scrollView.bounces = YES;
     [self addSubview:_scrollView];
     
     // Add tap gesture for selecting row.
@@ -112,12 +114,17 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
 - (void)setupGradientView
 {
     _gradientView = [[CSPickerGradientView alloc] initWithFrame:self.bounds];
-    _gradientView.locations = @[ @0.0f, @0.2f, @0.8f, @1.f];
+    _gradientView.locations = @[ @0.0f, @0.3f, @0.7f, @1.f];
     _gradientView.CGColors = @[ (id)[UIColor blackColor].CGColor,
                                 (id)[UIColor clearColor].CGColor,
                                 (id)[UIColor clearColor].CGColor,
                                 (id)[UIColor blackColor].CGColor ];
     [self addSubview:_gradientView];
+}
+
+- (void)setBounces:(BOOL)bounces
+{
+    _scrollView.bounces = bounces;
 }
 
 #pragma mark - Geometry
@@ -287,7 +294,7 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
 - (void)tap:(UITapGestureRecognizer *)gesture
 {
     CGFloat y = [gesture locationInView:self].y;
-    NSInteger rowOffset = -1;
+    NSInteger rowOffset = 0;
     if (y < _topTableView.frame.size.height) {
         y = _topTableView.frame.size.height - y;
         rowOffset = -ceilf(y / _backTableViewHeight);
@@ -297,9 +304,15 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
         rowOffset = ceilf(y / _backTableViewHeight);
     }
     
-    NSInteger selectedRow = _selectedRow + rowOffset;
-    if (selectedRow != _selectedRow && selectedRow >= 0 && selectedRow < _count) {
-        [self setSelectedRow:selectedRow animated:YES];
+    if (rowOffset != 0) {
+        NSInteger selectedRow = _selectedRow + rowOffset;
+        if (selectedRow != _selectedRow && selectedRow >= 0 && selectedRow < _count) {
+            [self setSelectedRow:selectedRow animated:YES];
+        }
+        
+    } else if ([_delegate respondsToSelector:@selector(pickerView:didSelectRow:)]) {
+        // Delegate row selecting.
+        [_delegate pickerView:self didSelectRow:_selectedRow];
     }
 }
 

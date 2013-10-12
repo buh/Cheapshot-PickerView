@@ -40,6 +40,7 @@ extern NSString *const kCSPickerViewFrontCellIdentifier;
 @property (nonatomic, weak) id <CSPickerViewDelegate> delegate;
 @property (nonatomic) NSInteger selectedRow;
 @property (nonatomic, readonly) CSPickerGradientView *gradientView;
+@property (nonatomic) BOOL bounces;
 
 - (void)reloadData;
 
