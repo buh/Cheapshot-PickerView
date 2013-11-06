@@ -227,7 +227,7 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
 - (void)setSelectedRow:(NSInteger)selectedRow animated:(BOOL)animated
 {
     _selectedRow = selectedRow;
-    [_scrollView setContentOffset:CGPointMake(0.f, _selectedRow * _frontTableViewHeight) animated:YES];
+    [_scrollView setContentOffset:CGPointMake(0.f, _selectedRow * _frontTableViewHeight) animated:animated];
     
     // Delegate row selecting.
     if ([_delegate respondsToSelector:@selector(pickerView:didSelectRow:)]) {
