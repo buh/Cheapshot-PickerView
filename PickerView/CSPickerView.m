@@ -155,7 +155,20 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
     // Top table frame.
     _topTableView.frame = CGRectMake(0.f, 0.f, self.frame.size.width, _frontTableViewY);
     // Bottom table frame.
-    _bottomTableView.frame = CGRectMake(0.f, _frontTableViewY + _frontTableViewHeight, self.frame.size.width, _frontTableViewY);
+    CGFloat height = _frontTableViewY;
+    if (_bottomTableView.delegate)
+    {
+        // Reduce bottom table height by bumber of cells.
+        NSInteger numberOfRows = [self tableView:_bottomTableView numberOfRowsInSection:0];
+        if (numberOfRows > 0 && [_bottomTableView.delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) {
+            NSIndexPath *indexPathZero = [NSIndexPath indexPathForRow:0 inSection:0];
+            height = fminf(_frontTableViewY, numberOfRows * [_bottomTableView.delegate tableView:_bottomTableView
+                                                                         heightForRowAtIndexPath:indexPathZero]);
+        } else {
+            height = 0;
+        }
+    }
+    _bottomTableView.frame = CGRectMake(0.f, _frontTableViewY + _frontTableViewHeight, self.frame.size.width, height);
     // Update Scroll View content size.
     [self updateScrollViewContentSize];
 }
@@ -197,6 +210,7 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
     [_frontTableView reloadData];
     _count = [_dataSource pickerView:self numberOfRowsInTableView:_topTableView];
     [self updateScrollViewContentSize];
+    [self updateGeometry];
     [self scrollViewDidScroll:_frontTableView];
 }
 
