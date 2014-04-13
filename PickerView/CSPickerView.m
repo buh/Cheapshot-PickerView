@@ -116,8 +116,8 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
     _gradientView = [[CSPickerGradientView alloc] initWithFrame:self.bounds];
     _gradientView.locations = @[ @0.0f, @0.3f, @0.7f, @1.f];
     _gradientView.CGColors = @[ (id)[UIColor blackColor].CGColor,
-                                (id)[UIColor clearColor].CGColor,
-                                (id)[UIColor clearColor].CGColor,
+                                (id)[[UIColor blackColor] colorWithAlphaComponent:0.0f].CGColor,
+                                (id)[[UIColor blackColor] colorWithAlphaComponent:0.0f].CGColor,
                                 (id)[UIColor blackColor].CGColor ];
     [self addSubview:_gradientView];
 }
