@@ -90,6 +90,18 @@ NSString *const kCSPickerViewFrontCellIdentifier = @"kCSPickerViewFrontCellIdent
     tableView.showsHorizontalScrollIndicator = NO;
     tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     tableView.backgroundColor = [UIColor clearColor];
+    
+    // Disable estimated height feature for iOS 11 or above.
+    // As of iOS11, tableview uses estimated height by default,
+    // the wrong value might return when calling tableview.contentSize 
+    // and it potentially crashes the ui
+    // FYI: https://forums.developer.apple.com/thread/81895
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0) {
+        tableView.estimatedRowHeight = 0;
+        tableView.estimatedSectionHeaderHeight = 0;
+        tableView.estimatedSectionFooterHeight = 0;
+    }
+    
     return tableView;
 }
 
